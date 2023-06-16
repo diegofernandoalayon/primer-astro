@@ -1,0 +1,25 @@
+---
+import CardPost from '../components/CardPost.astro'
+import MiLayout from '../layouts/MiLayout.astro'
+//
+const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+const post = await response.json()
+
+type userType = {
+userId: number
+title: string
+body: string
+}
+
+---
+<MiLayout title="this is title">
+  
+  <h1>mis Publicaciones</h1>
+  {
+    post.map((user:userType) => (
+      <CardPost id={user.userId} title={user.title} body={user.body} />
+      
+      ))
+    }
+</MiLayout>
+  

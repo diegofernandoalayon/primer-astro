@@ -1,0 +1,7 @@
+---
+import MiLayout from "./MiLayout.astro";
+const {frontmatter} = Astro.props
+---
+<MiLayout title={frontmatter?.title || 'default' }>
+  <slot/>
+</MiLayout>
