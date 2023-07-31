@@ -3,5 +3,10 @@ import MiLayout from "./MiLayout.astro";
 const {frontmatter} = Astro.props
 ---
 <MiLayout title={frontmatter?.title || 'default' }>
-  <slot/>
+  <section  class="text-zinc-800 dark:text-zinc-200">
+    <h1 class="text-red-500 text-4xl capitalize">{frontmatter.title}</h1>
+    <small class="text-zinc-400">{frontmatter.date}</small>
+    <slot/>
+    <a href="/">ir a entradas</a>
+  </section>
 </MiLayout>
