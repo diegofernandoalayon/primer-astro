@@ -1,26 +1,95 @@
 ---
+import DarkModeBtn from '../components/DarkModeBtn';
 import background from '../images/colorado.jpeg'
 interface Props {
   title?: string;
 }
 const {title} = Astro.props
+
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  >
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
 </head>
-<body>
-  <slot />
+<body class="bg-white dark:bg-[#202020] ">
+  <script is:inline>
+    const theme = (() => {
+      if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+        return localStorage.getItem("theme");
+      }
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+      return "light";
+    })();
+  
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+    window.localStorage.setItem("theme", theme);
+  </script>
+  <DarkModeBtn client:load />
+  
+  <main class=" mx-auto u-container ">
+    <slot />
+  </main>
 </body>
 </html>
 <style is:global define:vars={{background}}>
-  body{
-		background-image:url(../images/colorado.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #eee;
-	}
+  body::before{
+    content: '';
+    background-color: rgba(135, 207, 107, 0.712);
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: -100px;
+    filter: blur(300px);
+    z-index: -1;
+  }
+  body::after{
+    content: '';
+    background-color: rgba(169, 102, 224, 0.514);
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    right: -100px;
+    bottom: 0;
+    filter: blur(300px);
+    z-index: -1;
+  }
+
+  .u-container{
+    width: 100%;
+    padding: 1rem;
+  }
+  @media (min-width: 640px){
+    .u-container{
+      max-width: 640px;
+      padding: 2rem;
+    }
+  }
+  @media (min-width: 768px){
+    .u-container{
+      max-width: 768px;
+      padding: 0;
+    }
+  }
+  @media (min-width: 1024px){
+    .u-container{
+      max-width: 1024px;
+      padding: 0;
+    }
+  }
+  @media (min-width: 1280px){
+    .u-container{
+      max-width: 1280px;
+      padding: 0;
+    }
+  }
+  
 </style>
