@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string
+}
+const { title } = Astro.props
+const post = await Astro.glob('../pages/blog/post/*.md')
+---
+<section class="bg-slate-500 bg-opacity-5 filter backdrop-blur-md rounded-md flex flex-col">
+  <h2 class="text-4xl text-blue-500">{title}</h2>
+  {
+    post.map(post => {
+      return(
+        <a href={post.url} class="dark:text-slate-200 dark:hover:text-slate-100 hover:bg-blue-300 hover:bg-opacity-10 p-1 hover:rounded-md">{post.frontmatter.title} &rarr;</a>
+      )
+    })
+  }
+</section>

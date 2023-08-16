@@ -4,19 +4,21 @@ import 'react-toastify/dist/ReactToastify.css';
 //
 import MiLayout from '../layouts/MiLayout.astro'
 import Button from '../components/Button.jsx'
-const post = await Astro.glob('./blog/post/*.md')
+import Entradas from '../components/Entradas.astro';
+// const post = await Astro.glob('./blog/post/*.md')
 // console.log(Button)
 ---
 <MiLayout title='blog'>
   <h1 class="text-8xl text-blue-600 bg-slate-300 pb-6 bg-opacity-10 rounded-sm block text-center md:text-left" >Blog</h1>
-  <section class="bg-slate-500 bg-opacity-5 filter backdrop-blur-md rounded-md">
+  <!-- <section class="bg-slate-500 bg-opacity-5 filter backdrop-blur-md rounded-md">
     <h2 class="text-4xl text-blue-500">Entradas&ldsh;</h2>
     {
       post.map(post => (
         <a href={`${post.url}`} class="dark:text-slate-200 dark:hover:text-slate-100 hover:bg-blue-300 hover:bg-opacity-10 p-1 hover:rounded-md">{post.frontmatter.title} &rarr;</a>
         ))
     }
-  </section>
+  </section> -->
+  <Entradas title="otro"/>
     <!-- se carga cuando el componente sea visible -->
   <Button client:load>Este es el boton</Button> 
   <ToastContainer client:load />
