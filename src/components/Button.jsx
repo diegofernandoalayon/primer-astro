@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const Button = ({children}) => {
   const [isSuscribe, setIsSuscribe] = useState(false)
   return (
-    <button onClick={() => {
+    <button className="dark:text-red-300 border-dotted border px-1" onClick={() => {
       toast.success('Felicidades ya estas suscrito')
       setIsSuscribe((a)=>!a)}
       }>
